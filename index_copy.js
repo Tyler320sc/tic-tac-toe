@@ -24,11 +24,12 @@ const printBoard = board => {
     }
   }
 
-  console.log(`${map(board[0][0])}|${map(board[0][1])}|${map(board[0][2])}`);
-  console.log(`-+-+-`);
-  console.log(`${map(board[1][0])}|${map(board[1][1])}|${map(board[1][2])}`);
-  console.log(`-+-+-`);
-  console.log(`${map(board[2][0])}|${map(board[2][1])}|${map(board[2][2])}`);
+  console.log(chalk.greenBright`${map(board[0][0])}|${map(board[0][1])}|${map(board[0][2])}`);
+  console.log(chalk.green.bold`-+-+-`);
+  console.log(chalk.greenBright`${map(board[1][0])}|${map(board[1][1])}|${map(board[1][2])}`);
+  console.log(chalk.green.bold`-+-+-`);
+  console.log(chalk.greenBright`${map(board[2][0])}|${map(board[2][1])}|${map(board[2][2])}`);
+
 }
 
 const winner = board => { // checks x horizontal
@@ -101,24 +102,29 @@ printBoard([
   [4, 5, 6],
   [7, 8, 9]
 ]);
+
 console.log();
 
 const gameLoop = (board, piece) => {
   // ask for user input (1 - 9)
-  const n = Number(prompt(`Choose a number where you want your ${piece} to go: `));
+  const n = Number(prompt(chalk.bold.green`Choose a number where you want your ${piece} to go: `));
+  console.log();
   // add 'x' or 'o' to user input spot
   const updatedBoard = addToBoard(n, board, piece);
   printBoard(updatedBoard);
   // check for winner or tie
   // if win or tie print message and return
   if (winner(updatedBoard) === 'x') {
-    console.log('X won!');
+    console.log();
+    console.log(chalk.bold.greenBright`X won!`);
     return; 
   } else if (winner(updatedBoard) === 'o') {
-    console.log('O won!');
+    console.log();
+    console.log(chalk.bold.greenBright`O won!`);
     return;
   } else if (winner(updatedBoard) === null && fullBoard(updatedBoard) === true) {
-    console.log('Tied!');
+    console.log();
+    console.log(chalk.bold.greenBright`Tied!`);
     return;
   } else {
     const nextPiece = piece === 'x' ? 'o' : 'x';

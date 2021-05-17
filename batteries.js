@@ -61,12 +61,11 @@ const setProp = (str, val, obj) => ({...obj, [str]: val});
 
 const removeProp = (str, obj) => ({...obj, [str]: undefined});
 
-// Functions gave to me by Tim
-
 // Returns a new array with the value at index i replaced by v
-const update = (i, v, list) => [...take(i, list), v, ...drop(i+1, list)]
+const update = (i, v, list) => [...take(i, list), v, ...drop(i+1, list)];
+
 // Returns a new matrix (2D array) with the value at index (x, y) replaced by v
-const updateMatrix = (x, y, v, mat) => [...take(x, mat), ...update(y, v, mat[x]), ...drop(x+1, mat)]
+const updateMatrix = (x, y, v, mat) => [...take(x, mat), update(y, v, mat[x]), ...drop(x+1, mat)]
 
 module.exports = {
   isEven,
@@ -93,5 +92,5 @@ module.exports = {
   removeProp,
   buildArray,
   update,
-  // updateMatrix
+  updateMatrix
 };
